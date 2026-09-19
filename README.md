@@ -5,7 +5,7 @@
 <p align="center">
   <a href="https://mosi-ai.github.io/RoboICL-GPT6-Astra.github.io/">Project Page</a>
   &nbsp;·&nbsp;
-  <a href="./put_bottles_l3_2shot_final_gpt6_request.json">Request Example</a>
+  <a href="./put_bottles_l3_2shot_final_gpt6_request.zip">Request Example</a>
 </p>
 
 RoboICL enables a general-purpose multimodal model to adapt to bimanual robot manipulation tasks at inference time from a small number of executable demonstrations. GPT-6 Astra directly generates low-level Cartesian action sequences through a single `Act` interface; a deterministic harness validates and executes them.
@@ -45,7 +45,7 @@ In a separate seed-0 sweep over 50 *Build Tower* layouts, RoboICL 3-shot reaches
 
 ## Released request example
 
-[`put_bottles_l3_2shot_final_gpt6_request.json`](./put_bottles_l3_2shot_final_gpt6_request.json) is the fully serialized final model request from a 2-shot *Put bottles in a bin* rollout at control step 687—the request visualized in the framework figure above.
+[`put_bottles_l3_2shot_final_gpt6_request.zip`](./put_bottles_l3_2shot_final_gpt6_request.zip) contains the fully serialized final model request from a 2-shot *Put bottles in a bin* rollout at control step 687—the request visualized in the framework figure above.
 
 It contains:
 
@@ -58,13 +58,14 @@ It contains:
 
 The RGB observations are embedded as JPEG data URLs, making the request self-contained. Reward values, success labels, evaluator metrics, privileged object state, task code, and layout metadata are not included in the action-generation request.
 
-Validate the JSON locally:
+Extract and validate the JSON locally:
 
 ```bash
+unzip put_bottles_l3_2shot_final_gpt6_request.zip
 python -m json.tool put_bottles_l3_2shot_final_gpt6_request.json > /dev/null
 ```
 
-SHA-256:
+SHA-256 of the extracted JSON:
 
 ```text
 7041a9c725d98a47f279dd721188573bceabb33a8b5dfe4072888ae370b27fee
