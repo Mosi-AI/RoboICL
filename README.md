@@ -3,7 +3,7 @@
 <p align="center"><strong>Multimodal Models as Few-Shot Robot Learners</strong></p>
 
 <p align="center">
-  <a href="https://mosi-ai.github.io/RoboICL-GPT6.github.io/">Project Page</a>
+  <a href="https://mosi-ai.github.io/RoboICL-GPT6-Astra.github.io/">Project Page</a>
   &nbsp;·&nbsp;
   <a href="./put_bottles_l3_2shot_final_gpt6_request.json">Request Example</a>
 </p>
