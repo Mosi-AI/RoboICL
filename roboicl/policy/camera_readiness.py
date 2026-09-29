@@ -19,6 +19,11 @@ def blank_cameras(observations):
 def capture(env, env_ids):
     rows = []
     for attempt in range(31):
+        # CaptureManager reads the most recently dispatched annotator buffer.
+        # Synchronize that buffer with the current physics state before every
+        # read; otherwise a valid (non-blank) initial frame can be reused for
+        # the entire rollout and will incorrectly pass the blank-frame check.
+        env.obs_manager.render_for_capture()
         observations = env.obs_manager.get_obs(env_idx_list=env_ids)
         # RoboDojo's observation manager returns a list ordered like
         # ``env_idx_list``; the policy-side helper also accepts the mapping
@@ -37,8 +42,6 @@ def capture(env, env_ids):
                 _log({'event': 'recovered', 'render_only_retries': attempt, 'attempts': rows})
             return observations
         rows.append({'attempt': attempt, 'blank_cameras': bad})
-        if attempt < 30:
-            env.render()  # Does not step physics or reuse old images.
     _log({'event': 'failed', 'attempts': rows})
     # Use the evaluator's infrastructure-failure path instead of advancing seeds.
     env._policy_failure = {
