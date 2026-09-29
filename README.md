@@ -16,6 +16,10 @@
 
 <p align="center"><em>RoboICL uses interaction memory alone on Open and one demonstration on the other categories.</em></p>
 
+<p align="center">
+  <img src="images/wechat.jpg" width="360" alt="RoboICL WeChat discussion group QR code">
+</p>
+
 ## News
 
 - **2026-09-29** Paper released on arXiv, together with the code and 800+ interactive evaluation rollouts.
