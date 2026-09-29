@@ -1,0 +1,17 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/make-kong/",
+    "description": "There is a Mahjong setup. The opponent first pushes out a tile. The robot needs to observe the discarded tile, identify the matching tiles on its side, and perform a valid kong action. The setup guarantees that a kong is possible.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The kong declaration state is not completed."
+      },
+      {
+        "score": "100",
+        "condition": "The three matching Mahjong tiles are pushed down, the non-matching tiles remain upright on the table, the target tile is correctly grasped and placed at the required position, the gripper is open, and no invalid robot motion is detected."
+      }
+    ]
+  }
+}

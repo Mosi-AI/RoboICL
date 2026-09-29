@@ -1,0 +1,12 @@
+[submodule "robodojo"]
+	path = third_party/RoboDojo
+	url = https://github.com/Mosi-AI/RoboDojo.git
+[submodule "xpolicylab"]
+	path = third_party/XPolicyLab
+	url = https://github.com/XPolicyLab/XPolicyLab.git
+[submodule "isaaclab"]
+	path = third_party/IsaacLab
+	url = https://github.com/isaac-sim/IsaacLab.git
+[submodule "curobo"]
+	path = third_party/curobo
+	url = https://github.com/NVlabs/curobo.git

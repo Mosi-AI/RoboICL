@@ -1,0 +1,24 @@
+{
+  "harness_overrides": {
+    "max_rotation_rad": 0.16
+  },
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/insert-key/",
+    "description": "There is a key and a keyhole on the table. The robot needs to pick up the key, hand it over to the other hand for pose adjustment, insert it accurately into the keyhole, and then turn it.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The key is not lifted."
+      },
+      {
+        "score": "15",
+        "condition": "The key is lifted at least 5 cm."
+      },
+      {
+        "score": "100",
+        "condition": "The key is inserted deep enough into the slot, aligned closely in x/y, kept upright, and successfully turned after insertion."
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/press-by-number/",
+    "description": "There are two number cards, two red buttons, and one blue confirmation button. The robot needs to read the numbers, press each red button the corresponding number of times, and then press the blue button to confirm. Pressing the blue button ends the task immediately.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The required press counts or confirm sequence is not completed exactly."
+      },
+      {
+        "score": "100",
+        "condition": "Button `0` is pressed exactly the number shown by `num0`, the blue confirm button is pressed, button `1` is pressed exactly the number shown by `num1`, the blue confirm button is pressed again, and the robot returns to origin."
+      }
+    ]
+  }
+}

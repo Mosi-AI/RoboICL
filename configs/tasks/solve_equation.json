@@ -1,0 +1,18 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/solve-equation/",
+    "description": "There is an arithmetic equation on the table and a pad for the answer. The equation is missing either a number or an operator. The robot needs to choose the correct missing item from the randomly arranged numbers and operators on the table and place it on the pad to complete the equation.",
+    "comment": "Each digit must remain within the permitted rotational tolerance relative to its initial pose.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The missing equation piece is not placed correctly."
+      },
+      {
+        "score": "100",
+        "condition": "The correct missing number/operator piece is placed on the missing mat and the robot returns to origin."
+      }
+    ]
+  }
+}

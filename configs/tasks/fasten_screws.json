@@ -1,0 +1,28 @@
+{
+  "harness_overrides": {
+    "max_rotation_rad": 0.18
+  },
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/fasten-screws/",
+    "description": "There are three screws and three nuts on the table. The screws and nuts come from five possible colors: red, blue, gray, yellow, and purple. In each episode, three different colors are selected, and the robot needs to match each screw with the nut of the same color, insert it, and tighten it. The screw positions vary within a small range, while the nut positions vary within a larger range. If a handover is needed, the robot can first place the screw in the middle and then let the other arm pick it up and fasten it.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "No nut is fastened onto its matching bolt."
+      },
+      {
+        "score": "20",
+        "condition": "Any one nut is upright, aligned with its matching bolt, rotated onto the bolt to the required depth, and the gripper is open."
+      },
+      {
+        "score": "50",
+        "condition": "Any two matching nut-bolt pairs are fastened correctly."
+      },
+      {
+        "score": "100",
+        "condition": "All three nut-bolt pairs are fastened, the gripper is open, and the robot returns to origin."
+      }
+    ]
+  }
+}

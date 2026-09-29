@@ -1,0 +1,17 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/swap-t/",
+    "description": "There are two T-shaped blocks on the table. The robot needs to grasp them with both hands, swap their positions, and place them back so that each block matches the original pose of the other one, including both position and orientation. This is a memory-based task.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The two T blocks are not swapped with the required pose accuracy."
+      },
+      {
+        "score": "100",
+        "condition": "The two T-shaped blocks swap their original xy positions, their orientations match the swapped targets, and the robot returns to origin."
+      }
+    ]
+  }
+}

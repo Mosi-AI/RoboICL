@@ -1,0 +1,11 @@
+{
+  "schema": "roboicl.data.v1",
+  "assets": {
+    "repo_id": "RoboDojo-Benchmark/RoboDojo",
+    "revision": "0a709fe7863f6c869a8d141676585a883fce4270",
+    "include": "Assets/**"
+  },
+  "references": {
+    "lock": "configs/reference_sources.lock.json"
+  }
+}

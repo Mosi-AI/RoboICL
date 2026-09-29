@@ -1,0 +1,33 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/fill-pen-holder/",
+    "description": "There is a pen holder and several pens. The robot needs to grasp the pen holder with one hand, use the other hand to place the pens into the holder one by one, and finally put the filled pen holder back on the table.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "No pen is correctly inserted into the pen holder."
+      },
+      {
+        "score": "10",
+        "condition": "Any one pen is correctly inserted tip-up into the upright pen holder."
+      },
+      {
+        "score": "25",
+        "condition": "Any two pens are correctly inserted into the pen holder."
+      },
+      {
+        "score": "40",
+        "condition": "Any three pens are correctly inserted into the pen holder."
+      },
+      {
+        "score": "90",
+        "condition": "All four pens are inserted into the upright pen holder, but the robot has not returned to origin yet."
+      },
+      {
+        "score": "100",
+        "condition": "All four pens are inserted, the pen holder is upright, and the robot returns to origin."
+      }
+    ]
+  }
+}

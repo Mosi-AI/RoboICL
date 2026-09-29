@@ -1,0 +1,30 @@
+{
+  "schema": "roboicl.upstream.v2",
+  "packages": [
+    {
+      "name": "RoboDojo",
+      "path": "third_party/RoboDojo",
+      "url": "https://github.com/Mosi-AI/RoboDojo.git",
+      "commit": "00ef04cd245bfa76e6f1e0bd8383c82f7964f942"
+    },
+    {
+      "name": "XPolicyLab",
+      "path": "third_party/XPolicyLab",
+      "url": "https://github.com/XPolicyLab/XPolicyLab.git",
+      "commit": "fa431ecd893ee706883e64fe5fe1464ec8cd928d"
+    },
+    {
+      "name": "IsaacLab",
+      "path": "third_party/IsaacLab",
+      "url": "https://github.com/isaac-sim/IsaacLab.git",
+      "commit": "afca7b09d60d8beb9c1cb28b43066499940b969b"
+    },
+    {
+      "name": "cuRobo",
+      "path": "third_party/curobo",
+      "url": "https://github.com/NVlabs/curobo.git",
+      "commit": "895c6517243f8cb091c73c018c8167192d39599a"
+    }
+  ],
+  "integration": "Submodules are loaded in place; RoboICL pins the RoboDojo integration commit containing the execution-side IK guard, camera validation, and external asset path adapters."
+}

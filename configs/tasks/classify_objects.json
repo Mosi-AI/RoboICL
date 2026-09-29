@@ -1,0 +1,28 @@
+{
+  "harness_overrides": {
+    "max_translation_m": 0.034
+  },
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/classify-objects/",
+    "description": "There are three categories of objects and three baskets. The robot needs to group the objects by category and place each category into a separate basket. Any basket can be used for any category, as long as objects of the same category are placed together.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "No category basket is completed."
+      },
+      {
+        "score": "15",
+        "condition": "One basket contains exactly one complete object category, with no objects from other categories, and the gripper is open."
+      },
+      {
+        "score": "40",
+        "condition": "Two baskets each contain exactly one complete category."
+      },
+      {
+        "score": "100",
+        "condition": "All three categories are separated into three baskets, the objects are settled inside the baskets, and the robot returns to origin."
+      }
+    ]
+  }
+}

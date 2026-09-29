@@ -1,0 +1,25 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/classify-objects-by-language/",
+    "description": "There are three baskets and three categories of unseen objects. The robot needs to understand the language instruction, identify the category of each object, and place the objects into the specified baskets from left to right.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "No specified category is placed into its assigned basket."
+      },
+      {
+        "score": "10",
+        "condition": "One specified category is placed into its assigned basket, no other objects are in that basket, and the gripper is open."
+      },
+      {
+        "score": "40",
+        "condition": "Two specified categories are placed into their assigned baskets, with no extra objects in those baskets."
+      },
+      {
+        "score": "100",
+        "condition": "All three specified categories are placed into the left, middle, and right baskets as instructed, no basket contains objects from another category, and the robot returns to origin."
+      }
+    ]
+  }
+}

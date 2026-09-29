@@ -1,0 +1,17 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/sort-nesting-dolls-by-size/",
+    "description": "There are five nesting dolls of different sizes on the table. The robot needs to sort them by size and arrange them in a straight row from left to right, from smallest to largest.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The dolls are not arranged in the required size order."
+      },
+      {
+        "score": "100",
+        "condition": "All five nesting dolls stand in a one horizontal straight row, are ordered from left to right from smallest to largest, and the robot returns to origin."
+      }
+    ]
+  }
+}

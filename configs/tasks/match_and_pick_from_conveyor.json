@@ -1,0 +1,17 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/match-and-pick-from-conveyor/",
+    "description": "An object first appears on the conveyor and is carried away. The robot needs to remember this object, observe the following objects on the conveyor, and pick the one that matches the first object.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The matching target object is not lifted high enough."
+      },
+      {
+        "score": "100",
+        "condition": "The matching target object is lifted at least 10 cm."
+      }
+    ]
+  }
+}

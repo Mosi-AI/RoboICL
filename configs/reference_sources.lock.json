@@ -1,0 +1,73 @@
+{
+  "schema": "roboicl.reference_sources.v2",
+  "protocol": "one_shot_j12_b12",
+  "repository": {
+    "repo_id": "RoboDojo-Benchmark/RoboDojo",
+    "revision": "35efbc7dedfdbeeb6e95fb749bd885d73d483e41"
+  },
+  "selection": {
+    "shots": 1,
+    "chunks_per_episode": 12,
+    "method": "nearest valid non-overlapping windows to 12 uniformly spaced targets, including frame zero and the final complete action window"
+  },
+  "references": [
+    {
+      "task": "deposit_coin",
+      "shots": 1,
+      "chunks": 12,
+      "horizon": 5,
+      "path": "deposit_coin/reference_1shot_train12_endpoint_h5",
+      "selected_action_starts": [
+        0,
+        17,
+        34,
+        50,
+        67,
+        84,
+        101,
+        118,
+        135,
+        151,
+        168,
+        185
+      ],
+      "portable_sha256": "558fd5f0c933ff4a0b4c7f0708739305c9cf99c153eabcb058d810f2f265e694",
+      "source": {
+        "repository_path": "data/RoboDojo/deposit_coin/arx_x5/data/episode_0000000.hdf5",
+        "install_path": "runtime-data/deposit_coin/train/episode_0000000.hdf5",
+        "sha256": "b9093beb1142f1e15ad38003a82abdc85f96417425193b0b5c7d9128ae90cd29",
+        "size": 172213297
+      }
+    },
+    {
+      "task": "fill_pen_holder",
+      "shots": 1,
+      "chunks": 12,
+      "horizon": 15,
+      "path": "fill_pen_holder/reference_1shot_train12_endpoint_h15",
+      "selected_action_starts": [
+        0,
+        83,
+        167,
+        250,
+        334,
+        417,
+        501,
+        584,
+        668,
+        751,
+        835,
+        918
+      ],
+      "portable_sha256": "c2936fe1dc5b5dc1e4de307e835cc32ce786abba6ea46bfa53f4304edc891dd0",
+      "verification_sha256": "09ec67083d84b01344cf346dbf691cdc597e22f9f19c35ce1cd79acb517ac2ab",
+      "source": {
+        "repository_revision": "0a709fe7863f6c869a8d141676585a883fce4270",
+        "repository_path": "data/RoboDojo/fill_pen_holder/arx_x5/data/episode_0000000.hdf5",
+        "install_path": "runtime-data/fill_pen_holder/train/episode_0000000.hdf5",
+        "sha256": "0d33a6cc7258945b60eff9ad4186570c4f4488e2f55bd73ec0df4f8f67494542",
+        "size": 245324592
+      }
+    }
+  ]
+}

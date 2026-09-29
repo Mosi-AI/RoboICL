@@ -1,0 +1,21 @@
+{
+  "id": "roboicl-1shot-j12-b12-v1",
+  "model": "gpt-6-astra-ssvip",
+  "api_mode": "responses",
+  "endpoint": "https://www.dmxapi.cn/v1/responses",
+  "shot_count": 1,
+  "train_chunk_count": 12,
+  "harness_overrides": {
+    "reasoning_effort": "xhigh",
+    "max_output_tokens": null,
+    "train_result_observations": true,
+    "demo_message_format": "tool_calls",
+    "live_anchor_count": 12,
+    "live_retain_latest": true,
+    "max_context_images": 50,
+    "ik_continuity_guard": true,
+    "max_action_corrections": 2,
+    "max_transport_attempts": 3,
+    "request_timeout_s": 600
+  }
+}

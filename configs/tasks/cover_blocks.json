@@ -1,0 +1,29 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/cover-blocks/",
+    "description": "There are three covers and three blocks arranged in a random order. The blocks are red, green, and blue. The robot needs to cover the blocks from left to right, remember the color under each cover, and then uncover the blocks in the order of red, green, and blue.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "No block-covering step is completed."
+      },
+      {
+        "score": "5",
+        "condition": "All three blocks are covered by cups from left to right."
+      },
+      {
+        "score": "15",
+        "condition": "After all blocks are covered, the red block is uncovered first while the green and blue blocks remain covered."
+      },
+      {
+        "score": "30",
+        "condition": "The red and green blocks are uncovered in order while the blue block remains covered."
+      },
+      {
+        "score": "100",
+        "condition": "All three blocks are first covered from left to right, then uncovered in red, green, and blue order; cup orientation remains valid and the robot returns to origin."
+      }
+    ]
+  }
+}

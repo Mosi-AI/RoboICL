@@ -1,0 +1,17 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/push-t/",
+    "description": "There is a thin gray T-shaped pad and a T-shaped block. The robot needs to push the T-shaped block until it is precisely aligned with and fitted onto the gray pad.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The target pose, reset, or no-lift condition is not satisfied."
+      },
+      {
+        "score": "100",
+        "condition": "The T-shaped block is within the target xy threshold, its orientation matches the target, the robot returns to origin, and the block is never lifted above the allowed height."
+      }
+    ]
+  }
+}

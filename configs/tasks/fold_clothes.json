@@ -1,0 +1,21 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/fold-clothes/",
+    "description": "There is a piece of clothing. The robot needs to fold it neatly.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The sleeve-fold condition is not reached."
+      },
+      {
+        "score": "20",
+        "condition": "When the gripper opens, both sleeves are folded inward close to the opposite chest points."
+      },
+      {
+        "score": "100",
+        "condition": "Both sleeves are folded inward, the hems are close to the shoulder points in x/y, the hem line is aligned with the shoulder line within the angle threshold, and the robot returns to origin."
+      }
+    ]
+  }
+}

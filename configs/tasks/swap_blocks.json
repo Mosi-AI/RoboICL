@@ -1,0 +1,17 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/swap-blocks/",
+    "description": "There are three mats, two blocks placed on two of the mats, and one button. The robot needs to swap the positions of the two blocks by using the empty mat as a temporary place. After each move, the robot must press the button.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The swap sequence is not completed, or the button is not pressed after each move."
+      },
+      {
+        "score": "100",
+        "condition": "The two target blocks are swapped using the empty mat, the button is pressed once after each of the three moves, the blocks finish on each other's original mats, and the robot returns to origin."
+      }
+    ]
+  }
+}

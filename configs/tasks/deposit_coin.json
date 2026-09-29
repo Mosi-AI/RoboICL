@@ -1,0 +1,24 @@
+{
+  "harness_overrides": {
+    "max_rotation_rad": 0.21
+  },
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/deposit-coin/",
+    "description": "There is a coin placed on a holder and a coin bank. The robot needs to pick up the coin and accurately insert it into the slot of the coin bank.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The coin is not lifted."
+      },
+      {
+        "score": "20",
+        "condition": "The coin is lifted at least 8 cm."
+      },
+      {
+        "score": "100",
+        "condition": "The coin bounding box is inside the coin bank slot region, and the robot returns to origin."
+      }
+    ]
+  }
+}
