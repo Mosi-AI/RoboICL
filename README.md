@@ -14,7 +14,7 @@
   </a>
 </p>
 
-<p align="center"><em>RoboDojo category-level comparison. RoboICL uses interaction memory alone on Open and one demonstration on the other categories.</em></p>
+<p align="center"><em>RoboICL uses interaction memory alone on Open and one demonstration on the other categories.</em></p>
 
 ## News
 
