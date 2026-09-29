@@ -1,0 +1,33 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/imitate-sorting-sequence/",
+    "description": "There are five categories of objects, with five objects on each side. The opposite robot places its objects into the basket on the right side in a certain order. The robot needs to observe and remember this sequence, then place its corresponding objects into the basket in the same order. This is a memory-based imitation task.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The first sequence step is not completed, or the policy robot moves before the opposite robot arm finishes."
+      },
+      {
+        "score": "5",
+        "condition": "The first target object is placed into the policy basket, later target objects are still outside it, all demonstration objects remain in the demo basket, and the gripper is open."
+      },
+      {
+        "score": "15",
+        "condition": "The first two target objects are placed in the correct sequence."
+      },
+      {
+        "score": "30",
+        "condition": "The first three target objects are placed in the correct sequence."
+      },
+      {
+        "score": "50",
+        "condition": "The first four target objects are placed in the correct sequence."
+      },
+      {
+        "score": "100",
+        "condition": "All five target objects are placed in sequence, all demonstration objects remain in the demo basket, the gripper is open, and the robot returns to origin."
+      }
+    ]
+  }
+}

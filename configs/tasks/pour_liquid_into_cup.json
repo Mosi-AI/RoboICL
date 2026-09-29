@@ -1,0 +1,17 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/pour-liquid-into-cup/",
+    "description": "There is a bottle containing liquid and a cup. The robot needs to pick up the bottle and pour the liquid into the cup.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The liquid is not successfully poured into the cup."
+      },
+      {
+        "score": "100",
+        "condition": "The cup contains the required amount of liquid and the bottle is upright."
+      }
+    ]
+  }
+}

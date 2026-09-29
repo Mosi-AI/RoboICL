@@ -1,0 +1,29 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/pack-objects-into-box/",
+    "description": "There are several objects on the table and a box. The robot needs to pick up all the objects, place them into the box, and ensure that each object is oriented with its front side facing left.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "No object is placed correctly into the box."
+      },
+      {
+        "score": "10",
+        "condition": "Any one object is inside the box with its front side facing left, the box is aligned, and the gripper is open."
+      },
+      {
+        "score": "25",
+        "condition": "Any two objects are placed correctly into the box."
+      },
+      {
+        "score": "50",
+        "condition": "Any three objects are placed correctly into the box."
+      },
+      {
+        "score": "100",
+        "condition": "All four objects are placed in the aligned box with correct facing direction, and the robot returns to origin."
+      }
+    ]
+  }
+}

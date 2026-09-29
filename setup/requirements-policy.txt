@@ -1,0 +1,12 @@
+# GPT calls use the harness HTTP transport. No robot model checkpoint is needed.
+numpy==1.26.0
+Pillow==11.3.0
+PyYAML==6.0.2
+h5py==3.14.0
+scipy==1.15.3
+opencv-python-headless==4.11.0.86
+websockets==15.0.1
+msgpack==1.1.1
+msgpack-numpy==0.4.8
+pydantic==2.11.7
+requests>=2.32,<3

@@ -1,0 +1,17 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/pick-from-conveyor-by-image/",
+    "description": "There is a board displaying an image of the target object, a basket, and a conveyor carrying multiple objects. The robot needs to first lift the basket more than 8 cm, identify the target object on the conveyor based on the image shown on the board, pick up the target object, and place it into the basket.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The target object is not placed into the lifted basket."
+      },
+      {
+        "score": "100",
+        "condition": "The image-specified target object is in the basket and lifted at least 8 cm."
+      }
+    ]
+  }
+}

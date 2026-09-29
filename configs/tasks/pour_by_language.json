@@ -1,0 +1,25 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/pour-by-language/",
+    "description": "There are three colored bottles and three colored bowls on the table. The robot needs to follow the language instruction and pour the liquid from each specified bottle into the corresponding specified bowl.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The first target pour is not completed."
+      },
+      {
+        "score": "20",
+        "condition": "The liquid from the first specified bottle is poured into its specified bowl, and the other two liquids have not been poured into their bowls."
+      },
+      {
+        "score": "50",
+        "condition": "The first two specified liquids are poured into their bowls, and the third liquid has not yet been poured."
+      },
+      {
+        "score": "100",
+        "condition": "All three specified liquids are poured into their corresponding bowls."
+      }
+    ]
+  }
+}

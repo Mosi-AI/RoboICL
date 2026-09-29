@@ -1,0 +1,29 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/organize-table/",
+    "description": "There are a computer, a keyboard, a mouse, an alarm clock, a cartoon figurine, three miscellaneous items, and a drawer. The robot needs to organize the table by placing the mouse on the mouse pad, pushing the keyboard into the frame, putting the figurine on the stand, placing the alarm clock on top of the drawer, opening the drawer, and putting all remaining miscellaneous items into it.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "No target item is organized correctly."
+      },
+      {
+        "score": "25",
+        "condition": "Any one target item is organized correctly: mouse on mouse pad, keyboard in the frame, figurine on its stand, or alarm clock on the drawer, with the gripper open."
+      },
+      {
+        "score": "50",
+        "condition": "Any two target items are organized correctly."
+      },
+      {
+        "score": "75",
+        "condition": "Any three target items are organized correctly."
+      },
+      {
+        "score": "100",
+        "condition": "All four target items are organized correctly and the robot returns to origin."
+      }
+    ]
+  }
+}

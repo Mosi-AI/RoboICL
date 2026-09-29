@@ -1,0 +1,21 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/stack-bowls/",
+    "description": "There are three bowls. The robot needs to stack all the bowls together.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "No two bowls are stacked correctly."
+      },
+      {
+        "score": "15",
+        "condition": "Any two bowls are stacked upright and the gripper is open."
+      },
+      {
+        "score": "100",
+        "condition": "All three bowls are stacked together, all bowls are upright, the bottom bowl is strictly and stably placed on the table, and the robot returns to origin."
+      }
+    ]
+  }
+}

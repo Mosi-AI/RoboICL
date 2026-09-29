@@ -1,0 +1,29 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/put-bottles-into-dustbin/",
+    "description": "There are four bottles on the table, and they may be either standing or lying down. A dustbin is placed beside the table. The robot needs to pick up the bottles and throw them into the dustbin. Because of the shifted table layout, bottles on the right side require a handover between the two hands before being discarded.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "No bottle is placed into the dustbin."
+      },
+      {
+        "score": "10",
+        "condition": "Any one bottle is inside the dustbin, and the gripper is open."
+      },
+      {
+        "score": "25",
+        "condition": "Any two bottles are inside the dustbin."
+      },
+      {
+        "score": "40",
+        "condition": "Any three bottles are inside the dustbin."
+      },
+      {
+        "score": "100",
+        "condition": "All four bottles are inside the dustbin and the robot returns to origin."
+      }
+    ]
+  }
+}

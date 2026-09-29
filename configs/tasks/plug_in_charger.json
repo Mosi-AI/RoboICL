@@ -1,0 +1,17 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/plug-in-charger/",
+    "description": "There is a charger plug and a power strip. The robot needs to pick up the charger plug and insert it into the power strip.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The charger is not fully plugged into the socket."
+      },
+      {
+        "score": "100",
+        "condition": "The charger is inside the socket, inserted to the required depth, upright, and the robot returns to origin."
+      }
+    ]
+  }
+}

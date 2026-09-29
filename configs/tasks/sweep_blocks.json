@@ -1,0 +1,22 @@
+{
+  "reference_instruction_aliases": {
+    "random": [
+      "Pick up the broom, hand it over to the right hand, then use the dustpan to sweep the objects."
+    ]
+  },
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/sweep-blocks/",
+    "description": "There is a broom and a dustpan on the left side, and the blocks are on the right side. The robot needs to pick up the broom, hand it over to the right hand, grasp the dustpan with the left hand, and sweep the blocks into the dustpan.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "The blocks are not fully swept into the dustpan."
+      },
+      {
+        "score": "100",
+        "condition": "The dustpan is positioned left of the broom, stably placed upright on the table, all blocks are inside the dustpan, and the robot returns to origin."
+      }
+    ]
+  }
+}

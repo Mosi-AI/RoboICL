@@ -1,0 +1,25 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/store-laptop-and-headphones/",
+    "description": "There is an open laptop on a laptop stand, a vertical laptop stand, a pair of headphones, and a headphone stand. The laptop opening angle is random but greater than 30 degrees. The robot needs to first hang the headphones on the headphone stand, then close the laptop, pick it up from the stand, and insert it into the vertical laptop stand.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "Neither the headphones nor the laptop is stored correctly."
+      },
+      {
+        "score": "20",
+        "condition": "The headphones are placed on the stand: the headband bridge is close to the support cradle and aligned, with the gripper open."
+      },
+      {
+        "score": "80",
+        "condition": "The headphones are correctly placed on the stand, and the laptop is closed, vertically inserted into the laptop rack, and within the required range."
+      },
+      {
+        "score": "100",
+        "condition": "Both the headphones and laptop conditions are satisfied and the robot returns to origin."
+      }
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "official_task_documentation": {
+    "version": "robodojo-public-2026-09-23",
+    "source": "https://robodojo-benchmark.com/doc/sim-tasks/store-tools-in-toolbox/",
+    "description": "There are several tools and a toolbox with designated slots. The robot needs to pick up each tool and place it into the corresponding position in the toolbox.",
+    "scoring": [
+      {
+        "score": "0",
+        "condition": "No tool is placed into its matching toolbox slot."
+      },
+      {
+        "score": "25",
+        "condition": "Any one tool is placed in its matching toolbox slot with the gripper open."
+      },
+      {
+        "score": "50",
+        "condition": "Any two tools are placed into their matching toolbox slots."
+      },
+      {
+        "score": "75",
+        "condition": "Any three tools are placed into their matching toolbox slots."
+      },
+      {
+        "score": "100",
+        "condition": "All four tools are placed in their matching slots, covered by the toolbox, and the robot returns to origin."
+      }
+    ]
+  }
+}
