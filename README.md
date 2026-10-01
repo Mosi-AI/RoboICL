@@ -252,7 +252,9 @@ third_party/
 ```
 
 <p align="center">
-  <img src="images/wechat.jpg" width="360" alt="RoboICL WeChat discussion group QR code">
+  <img src="images/wechat.jpg" width="330" alt="RoboICL WeChat discussion group QR code">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="images/rednote.png" width="330" alt="RoboICL RedNote discussion group QR code">
 </p>
 
 ## Citation
