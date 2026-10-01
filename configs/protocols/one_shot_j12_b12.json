@@ -5,6 +5,7 @@
   "endpoint": "https://www.dmxapi.cn/v1/responses",
   "shot_count": 1,
   "train_chunk_count": 12,
+  "reference_setting": "configs/references/one_shot_j12_b12.json",
   "harness_overrides": {
     "reasoning_effort": "xhigh",
     "max_output_tokens": null,

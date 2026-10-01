@@ -121,8 +121,27 @@ def _observation(data, frame: int) -> dict:
     }
 
 
+def validate_locked_starts(data, starts: list[int], horizon: int, count: int, *,
+                           max_translation_m: float, max_rotation_rad: float) -> list[int]:
+    """Validate an archived paper selection without silently re-selecting it."""
+    total = len(data["action/left_ee_poses"])
+    if (len(starts) != count or starts != sorted(set(starts))
+            or any(type(start) is not int for start in starts)):
+        raise ValueError(f"Locked TRAIN selection must contain {count} unique ordered starts")
+    if any(right - left < horizon for left, right in zip(starts, starts[1:])):
+        raise ValueError("Locked TRAIN windows overlap")
+    if any(start < 0 or start + horizon >= total for start in starts):
+        raise ValueError("Locked TRAIN window/result lies outside the source trajectory")
+    if any(not _valid_chunk(data, start, horizon, max_translation_m, max_rotation_rad)
+           for start in starts):
+        raise ValueError("Locked TRAIN window violates the shared TRAIN/LIVE action bounds")
+    return list(starts)
+
+
 def build(task: str, source: Path, output: Path, source_sha256: str,
-          horizon: int, chunks: int = 12, source_id: str | None = None) -> dict:
+          horizon: int, chunks: int = 12, source_id: str | None = None,
+          selected_starts: list[int] | None = None,
+          reference_setting_id: str | None = None) -> dict:
     load_task(task)
     source = source.expanduser().resolve()
     output = output.expanduser().resolve()
@@ -145,15 +164,16 @@ def build(task: str, source: Path, output: Path, source_sha256: str,
         if isinstance(instruction, bytes):
             instruction = instruction.decode("utf-8")
         shared = json.loads((Path(__file__).resolve().parents[1] / "configs/shared_harness.json").read_text())
-        starts = select_starts(
-            data,
-            horizon,
-            chunks,
-            max_translation_m=shared["max_translation_m"],
-            max_rotation_rad=load_task(task).get("harness_overrides", {}).get(
-                "max_rotation_rad", shared["max_rotation_rad"]
-            ),
+        rotation_limit = load_task(task).get("harness_overrides", {}).get(
+            "max_rotation_rad", shared["max_rotation_rad"]
         )
+        starts = (validate_locked_starts(
+            data, selected_starts, horizon, chunks,
+            max_translation_m=shared["max_translation_m"], max_rotation_rad=rotation_limit,
+        ) if selected_starts is not None else select_starts(
+            data, horizon, chunks, max_translation_m=shared["max_translation_m"],
+            max_rotation_rad=rotation_limit,
+        ))
         examples = []
         for start in starts:
             tensor = tensor_at(data, start, horizon)
@@ -220,6 +240,7 @@ def build(task: str, source: Path, output: Path, source_sha256: str,
         "n_shots": 1,
         "prediction_horizon": horizon,
         "train_chunk_count": chunks,
+        "reference_setting_id": reference_setting_id,
         "train_image_count": chunks * 2,
         "endpoint_alignment": {
             "schema": "roboicl.train_selection.v1",
@@ -281,12 +302,16 @@ def main() -> int:
         "--source-id",
         help="Portable source path relative to the data root; defaults to runtime-data/<task>/train/<file>",
     )
+    builder.add_argument("--selected-starts", help="Comma-separated exact TRAIN action starts")
+    builder.add_argument("--reference-setting-id")
     checker = subparsers.add_parser("verify")
     checker.add_argument("--reference", required=True, type=Path)
     checker.add_argument("--chunks", type=int, default=12)
     args = parser.parse_args()
+    starts = ([int(value) for value in args.selected_starts.split(",")]
+              if args.command == "build" and args.selected_starts else None)
     result = (build(args.task, args.source, args.output, args.source_sha256, args.horizon,
-                    args.chunks, args.source_id)
+                    args.chunks, args.source_id, starts, args.reference_setting_id)
               if args.command == "build" else verify(args.reference, chunks=args.chunks))
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0

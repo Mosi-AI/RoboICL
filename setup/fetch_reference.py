@@ -17,7 +17,8 @@ if str(CODE) not in sys.path:
     sys.path.insert(0, str(CODE))
 
 from roboicl.config import reference_path
-from roboicl.reference import build, portable_bundle_sha256, verify
+from roboicl.reference import build, verify
+from roboicl.reference_setting import load_reference_setting, reference_record
 
 
 def file_sha256(path: Path) -> str:
@@ -35,23 +36,13 @@ def main() -> int:
     parser.add_argument("--endpoint", default=os.environ.get("HF_ENDPOINT", "https://huggingface.co"))
     args = parser.parse_args()
 
-    lock = json.loads((CODE / "configs/reference_sources.lock.json").read_text(encoding="utf-8"))
-    matches = [row for row in lock["references"] if row["task"] == args.task]
-    if len(matches) != 1:
-        raise ValueError(
-            f"No unique published J=12 reference for {args.task!r}; "
-            "use `python -m roboicl.reference build` with an explicit source HDF5"
-        )
-    row = matches[0]
-    repository = lock["repository"]
-    # Some published references pin the source episode to a different commit
-    # than the repository-level protocol metadata.  The episode pin is
-    # authoritative; falling back to the repository revision preserves the
-    # original behavior for older lock records.
+    setting = load_reference_setting("configs/references/one_shot_j12_b12.json")
+    row = reference_record(setting, args.task)
+    repository = setting["source_repository"]
     source_revision = row["source"].get("repository_revision", repository["revision"])
     data_root = args.data_root.expanduser().resolve()
     source = data_root / row["source"]["install_path"]
-    output = data_root / "runtime-data" / row["path"]
+    output = reference_path(data_root, args.task, row["reference_horizon"], 12)
     os.environ["ROBOICL_DATA_ROOT"] = str(data_root)
 
     source.parent.mkdir(parents=True, exist_ok=True)
@@ -69,29 +60,33 @@ def main() -> int:
             + row["source"]["repository_path"]
         )
         urllib.request.urlretrieve(url, partial)
-        if partial.stat().st_size != row["source"]["size"]:
+        if row["source"].get("size") is not None and partial.stat().st_size != row["source"]["size"]:
             raise ValueError(f"Downloaded source size mismatch: {partial}")
         if file_sha256(partial) != row["source"]["sha256"]:
             raise ValueError(f"Downloaded source SHA256 mismatch: {partial}")
         partial.replace(source)
 
     if output.exists():
-        report = verify(output, chunks=row["chunks"])
+        report = verify(output, chunks=setting["train"]["blocks_per_demonstration"])
+        bundle = json.loads((output / "train_reference_bundle.json").read_text(encoding="utf-8"))
+        episode = bundle["episodes"][0]
+        if (episode.get("sha256") != row["source"]["sha256"]
+                or episode.get("selected_action_starts") != row["selected_action_starts"]
+                or bundle.get("prediction_horizon") != row["reference_horizon"]):
+            raise ValueError(f"Existing reference does not match {setting['id']}: {output}")
     else:
         report = build(
             args.task,
             source,
             output,
             row["source"]["sha256"],
-            row["horizon"],
-            row["chunks"],
+            row["reference_horizon"],
+            setting["train"]["blocks_per_demonstration"],
             row["source"]["install_path"],
+            row["selected_action_starts"],
+            setting["id"],
         )
-    bundle = json.loads((output / "train_reference_bundle.json").read_text(encoding="utf-8"))
-    portable = portable_bundle_sha256(bundle)
-    if row.get("portable_sha256") and portable != row["portable_sha256"]:
-        raise ValueError(f"Generated reference differs from the published lock: {output}")
-    report.update(reference=str(output), portable_sha256=portable)
+    report.update(reference=str(output), reference_setting_id=setting["id"])
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return 0
 

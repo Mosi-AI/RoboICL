@@ -36,7 +36,7 @@ from roboicl.policy.image_budget import (
 )
 from roboicl.policy.provider_compat import validate_api_mode, validate_endpoint
 from roboicl.paths import data_root as get_data_root, results_root as get_results_root, python_paths
-from roboicl.policy.train_reference_bundle import portable_bundle_digest
+from roboicl.reference_setting import load_reference_setting, reference_record
 from roboicl.upstream import verify_submodules
 
 
@@ -169,9 +169,6 @@ def reference_preflight(task, shots, config, ref, profile, data_root):
             if not source.is_absolute():
                 source = data_root / source
             elif not source.is_file():
-                # Historical bundles can retain an absolute path from the
-                # source server. Prefer the canonical local task location;
-                # the locked episode SHA256 below remains authoritative.
                 candidate = (data_root / "runtime-data" / task / "train"
                              / source.name)
                 if candidate.is_file():
@@ -203,32 +200,22 @@ def reference_preflight(task, shots, config, ref, profile, data_root):
                                                 "available": False,
                                                 "status": "offline_verified_bundle"})
         report.update(bundle_sha256=digest, verification_sha256=sha(ref / "verification.json"))
-        lock = json.loads((CODE / "configs/reference_sources.lock.json").read_text())
-        try:
-            relative = ref.relative_to(data_root).as_posix()
-        except ValueError:
-            relative = None
-        if relative and relative.startswith("runtime-data/"):
-            relative = relative.removeprefix("runtime-data/")
-        records = [row for row in lock.get("references", [])
-                   if row.get("task") == task and row.get("shots") == shots
-                   and row.get("path") == relative]
-        if records:
-            locked = records[0]
-            if locked.get("horizon") != config["predict_horizon"]:
-                raise ValueError(f"Reference lock horizon mismatch for {task}/{shots}-shot")
-            if locked.get("portable_sha256") != portable_bundle_digest(bundle):
-                raise ValueError(f"Reference payload differs from configs/reference_sources.lock.json: {ref}")
-            report["reference_lock"] = {
-                "path": relative or str(ref),
-                "portable_sha256": locked["portable_sha256"],
-            }
-        else:
-            report["reference_lock"] = {
-                "path": relative,
-                "portable_sha256": portable_bundle_digest(bundle),
-                "status": "local hash-locked reference not yet listed in the published lock",
-            }
+        setting_file = profile.get("reference_setting")
+        if not setting_file:
+            raise ValueError("One-shot protocol must name a reference_setting manifest")
+        setting = load_reference_setting(setting_file)
+        locked = reference_record(setting, task)
+        episode = episodes[0]
+        if (locked["reference_horizon"] != config["predict_horizon"]
+                or locked["selected_action_starts"] != episode.get("selected_action_starts")
+                or locked["source"]["sha256"] != episode.get("sha256")
+                or locked["source"]["episode"] != episode.get("source_episode")
+                or Path(locked["source"]["install_path"]).name != Path(episode["source_file"]).name):
+            raise ValueError(f"TRAIN reference does not match locked setting {setting['id']}: {ref}")
+        report["reference_setting"] = {
+            "id": setting["id"], "manifest": setting["_path"],
+            "selected_action_starts": locked["selected_action_starts"],
+        }
     cameras = config.get("demo_cameras", ["cam_head", "cam_left_wrist", "cam_right_wrist"])
     layout = config.get("image_layout", "triptych")
     fixed = reference_image_count(bundle, cameras=cameras,
@@ -296,10 +283,9 @@ def check(task, shots, seed, layout, variant, action_horizon=None, *,
     ]
     config = json.loads((CODE / "configs/shared_harness.json").read_text())
     config.update(profile.get("harness_overrides", {}))
-    # Task contracts refine the shared/protocol defaults (for example action
-    # bounds or a legacy reference's optional result-camera payload).  Keeping
-    # this last makes those task-specific constraints authoritative without
-    # duplicating the common harness in every task file.
+    # Task contracts refine the shared/protocol defaults. Keeping this last
+    # makes task-specific constraints authoritative without duplicating the
+    # common harness in every task file.
     config.update(c.get("harness_overrides", {}))
     config.update(predict_horizon=task_horizons[task], execute_horizon=task_horizons[task])
     document_version, document_source, document_prompt = render_official_task_prompt(c)

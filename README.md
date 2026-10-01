@@ -120,7 +120,13 @@ download, and links `data/Assets` to the cache.
 
 ### One-shot references
 
-Fetch and deterministically build either published one-shot reference:
+The paper benchmark contains exactly 8 Open tasks evaluated zero-shot and 22
+non-Open tasks supplied with one demonstration. The complete source-episode
+identity, HDF5 SHA256, prediction horizon, and all 12 selected action-window
+starts are archived in
+[`configs/references/one_shot_j12_b12.json`](configs/references/one_shot_j12_b12.json).
+
+Fetch and deterministically build any archived one-shot reference, for example:
 
 ```bash
 "$ROBOICL_POLICY_PYTHON" setup/fetch_reference.py deposit_coin \
@@ -130,9 +136,15 @@ Fetch and deterministically build either published one-shot reference:
   --data-root "$ROBOICL_DATA_ROOT"
 ```
 
-Each source episode is checked against `configs/reference_sources.lock.json`.
-The generated reference bundle contains 12 non-overlapping action blocks and
-their starting/result observations.
+The source is checked by SHA256, and the builder uses the exact archived starts
+rather than silently re-running a heuristic. The generated bundle contains 12
+non-overlapping action blocks and their starting/result observations.
+
+TRAIN and LIVE use different selectors. TRAIN uses the exact action-window
+starts recorded in the setting manifest. LIVE does not sample video frames:
+eleven uniformly spaced time anchors retain the first complete executed
+interaction that crosses each anchor, while the twelfth slot retains the latest
+complete interaction.
 
 To build a reference for another task from a local HDF5 episode:
 
@@ -144,7 +156,8 @@ To build a reference for another task from a local HDF5 episode:
   --source-sha256 "$SOURCE_SHA256" \
   --output "$ROBOICL_DATA_ROOT/runtime-data/$TASK/reference_1shot_train12_endpoint_h$H" \
   --horizon "$H" \
-  --chunks 12
+  --chunks 12 \
+  --selected-starts "$START_0,$START_1,...,$START_11"
 ```
 
 ## Run RoboICL
@@ -236,7 +249,7 @@ configs/
 ├── tasks/                 official documentation for 42 tasks
 ├── adaptive_horizons.json task-specific action horizons
 ├── data.lock.json         frozen asset revision
-├── reference_sources.lock.json
+├── references/             setting-level source episodes and exact TRAIN windows
 └── upstream.lock.json     pinned submodule commits
 setup/
 ├── fetch_assets.py

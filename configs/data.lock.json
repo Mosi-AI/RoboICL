@@ -6,6 +6,8 @@
     "include": "Assets/**"
   },
   "references": {
-    "lock": "configs/reference_sources.lock.json"
+    "settings": {
+      "one_shot_j12_b12": "configs/references/one_shot_j12_b12.json"
+    }
   }
 }
