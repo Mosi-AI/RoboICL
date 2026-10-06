@@ -18,6 +18,7 @@
 
 ## News
 
+- **2026-10-07** For reproducible rollouts, we recommend the official API or a stable third-party relay, such as DMXAPI's `gpt-6-astra-ssvip`, rather than an unstable coding-plan endpoint.
 - **2026-09-29** Paper released on arXiv, together with the code and 800+ interactive evaluation rollouts.
 - **2026-09-19** Research Preview launched.
 
@@ -274,15 +275,10 @@ third_party/
 
 ```bibtex
 @article{liu2026roboicl,
-  title   = {RoboICL: Embodied In-Context Learning with GPT-6 Astra},
-  author  = {Liu, Fangcheng and Shen, Yeqing and Cheng, Anda and Mi, Weishi and
-             Tang, Chao and Liu, Chenyuan and Xiang, Yushun and Li, Tingguang and
-             Li, Yong-Lu and Tang, Yehui},
-  journal = {arXiv preprint arXiv:2609.34261},
-  year    = {2026},
-  eprint  = {2609.34261},
-  archivePrefix = {arXiv},
-  url     = {https://arxiv.org/abs/2609.34261}
+  title={RoboICL: Embodied In-Context Learning with GPT-6 Astra},
+  author={Liu, Fangcheng and Shen, Yeqing and Cheng, Anda and Mi, Weishi and Tang, Chao and Liu, Chenyuan and Xiang, Yushun and Li, Tingguang and Li, Yong-Lu and Tang, Yehui},
+  journal={arXiv preprint arXiv:2609.34261},
+  year={2026}
 }
 ```
 
