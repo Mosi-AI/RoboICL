@@ -198,9 +198,15 @@ def sample_steps(available, count, include_endpoints=True):
         return [steps[-1]]
     if include_endpoints:
         indices = np.linspace(0, len(steps)-1, count).round().astype(int)
-    else:
-        indices = np.linspace(0, len(steps)-1, count+2)[1:-1].round().astype(int)
-    return [steps[i] for i in sorted(set(indices.tolist()))]
+        return [steps[i] for i in sorted(set(indices.tolist()))]
+    # Exclude the first and last observed frames. When fewer than two
+    # non-endpoint frames exist, endpoint exclusion leaves nothing to sample.
+    interior = steps[1:-1]
+    count = min(count, len(interior))
+    if not interior:
+        return []
+    indices = np.linspace(0, len(interior)-1, count).round().astype(int)
+    return [interior[i] for i in sorted(set(indices.tolist()))]
 
 
 def canonical_tool_history(outputs):

@@ -121,6 +121,20 @@ def _dispatch_env(targets, current=None, guard=True):
 
 
 class CurrentDispatchTests(unittest.TestCase):
+    def test_sample_steps_excludes_endpoints_when_requested(self):
+        from roboicl.policy.dialogue_policy import sample_steps
+
+        # Interior-only sampling must never return the first or last frame.
+        self.assertEqual(sample_steps([0, 1, 2, 3, 4], 3, include_endpoints=False), [1, 2, 3])
+        self.assertEqual(sample_steps([0, 1, 2, 3, 4, 5], 4, include_endpoints=False), [1, 2, 3, 4])
+        # Endpoint inclusion is unchanged.
+        self.assertEqual(sample_steps([0, 1, 2, 3, 4], 3, include_endpoints=True), [0, 2, 4])
+        # With only two observed frames there is no interior to sample.
+        self.assertEqual(sample_steps([0, 1], 2, include_endpoints=False), [])
+        # More interior than needed keeps the full interior, never the endpoints.
+        self.assertEqual(sample_steps([0, 1, 2], 3, include_endpoints=False), [1])
+        self.assertEqual(sample_steps([0, 1, 2, 3], 4, include_endpoints=False), [1, 2])
+
     @classmethod
     def setUpClass(cls):
         cls.dispatch = _dispatch_method()
