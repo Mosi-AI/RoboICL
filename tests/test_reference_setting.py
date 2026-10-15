@@ -25,6 +25,26 @@ class ReferenceSettingTest(unittest.TestCase):
         swap_blocks = next(row for row in setting["one_shot_references"] if row["task"] == "swap_blocks")
         self.assertEqual(swap_blocks["reference_horizon"], 10)
 
+    def test_replaced_upstream_sources_pin_their_original_revisions(self):
+        setting = load_reference_setting("configs/references/one_shot_j12_b12.json")
+        records = {row["task"]: row["source"] for row in setting["one_shot_references"]}
+        self.assertEqual(
+            records["build_tower"]["repository_revision"],
+            "0a709fe7863f6c869a8d141676585a883fce4270",
+        )
+        self.assertEqual(
+            records["organize_table"]["repository_revision"],
+            "16f509f1dd2a10a2ed7312ef0de8dd7db135869b",
+        )
+
+    def test_repository_episode_alias_is_explicit(self):
+        setting = load_reference_setting("configs/references/one_shot_j12_b12.json")
+        records = {row["task"]: row["source"] for row in setting["one_shot_references"]}
+        self.assertEqual(records["swap_blocks"]["episode"], 1)
+        self.assertNotIn("repository_episode", records["swap_blocks"])
+        self.assertEqual(records["play_Xylophone"]["episode"], 0)
+        self.assertEqual(records["play_Xylophone"]["repository_episode"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()

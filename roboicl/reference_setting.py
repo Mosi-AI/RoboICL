@@ -43,10 +43,15 @@ def load_reference_setting(path: str | Path) -> dict:
         horizon = row.get("reference_horizon")
         total = source.get("total_frames")
         episode = source.get("episode")
+        repository_episode = source.get("repository_episode", episode)
         install_name = Path(source.get("install_path", "")).stem
+        repository_name = Path(source.get("repository_path", "")).stem
         if (type(episode) is not int or not install_name.startswith("episode_")
                 or install_name.rsplit("_", 1)[-1] != f"{episode:07d}"):
             raise ValueError(f"Installed source episode does not match its path for {row.get('task')}")
+        if (type(repository_episode) is not int or not repository_name.startswith("episode_")
+                or repository_name.rsplit("_", 1)[-1] != f"{repository_episode:07d}"):
+            raise ValueError(f"Repository source episode does not match its path for {row.get('task')}")
         if (not isinstance(starts, list) or len(starts) != chunks
                 or any(type(item) is not int for item in starts)
                 or starts != sorted(set(starts))):
