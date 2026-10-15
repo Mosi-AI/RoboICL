@@ -140,6 +140,8 @@ Fetch and deterministically build any archived one-shot reference, for example:
 The source is checked by SHA256, and the builder uses the exact archived starts
 rather than silently re-running a heuristic. The generated bundle contains 12
 non-overlapping action blocks and their starting/result observations.
+If an upstream historical LFS object is no longer retained, the manifest uses a
+versioned RoboICL release asset with the same locked SHA256 and size.
 
 TRAIN and LIVE use different selectors. TRAIN uses the exact action-window
 starts recorded in the setting manifest. LIVE does not sample video frames:

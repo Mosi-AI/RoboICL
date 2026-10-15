@@ -39,6 +39,10 @@ def load_reference_setting(path: str | Path) -> dict:
             if (not isinstance(field_value, str) or not field_value or field_path.is_absolute()
                     or ".." in field_path.parts):
                 raise ValueError(f"Non-portable {key} for {row.get('task')}")
+        download_url = source.get("download_url")
+        if download_url is not None and (
+                not isinstance(download_url, str) or not download_url.startswith("https://")):
+            raise ValueError(f"Invalid download_url for {row.get('task')}")
         starts = row.get("selected_action_starts")
         horizon = row.get("reference_horizon")
         total = source.get("total_frames")

@@ -45,6 +45,16 @@ class ReferenceSettingTest(unittest.TestCase):
         self.assertEqual(records["play_Xylophone"]["episode"], 0)
         self.assertEqual(records["play_Xylophone"]["repository_episode"], 1)
 
+    def test_missing_upstream_lfs_objects_use_archived_downloads(self):
+        setting = load_reference_setting("configs/references/one_shot_j12_b12.json")
+        records = {row["task"]: row["source"] for row in setting["one_shot_references"]}
+        for task in ("build_tower", "fill_pen_holder"):
+            self.assertEqual(
+                records[task]["download_url"],
+                "https://github.com/Mosi-AI/RoboICL/releases/download/"
+                f"paper-reference-sources-2026-09-29/{task}_episode_0000000.hdf5",
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

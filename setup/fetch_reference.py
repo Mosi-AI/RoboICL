@@ -54,7 +54,7 @@ def main() -> int:
         partial = source.with_suffix(source.suffix + ".partial")
         if partial.exists():
             raise RuntimeError(f"Partial download preserved for inspection: {partial}")
-        url = (
+        url = row["source"].get("download_url") or (
             args.endpoint.rstrip("/")
             + f"/datasets/{repository['repo_id']}/resolve/{source_revision}/"
             + row["source"]["repository_path"]
