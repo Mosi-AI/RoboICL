@@ -7,3 +7,6 @@ eval_result/
 *.log
 .env
 .env.*
+
+# Private paper figures, tables, and unpublished experiment data.
+paper_assets/
